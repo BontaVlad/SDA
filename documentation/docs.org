@@ -14,38 +14,40 @@
   | address      | TString    |
   ----------------------------------------------------------
   
-  _AddressBook_:
-    items: TItem[]
+**** AddressBook
+  | field | field type |
+  |-------+------------|
+  | items | TItem[]    |
     
-
-#+BEGIN_SRC python
-  subalgorithm init(addressBook, items) is:
-  endsubalgorithm
-#+END_SRC python
-    
-
-#+BEGIN_SRC python
-  subalgorithm insert(addressBook, item) is:
-  endsubalgorithm
-#+END_SRC python
+**** Operations
+  #+BEGIN_SRC python
+    subalgorithm init(addressBook, items) is:
+    endsubalgorithm
+  #+END_SRC python
 
 
-#+BEGIN_SRC python
-  subalgorithm search(addressBook, item) is:
-  endsubalgorithm
-#+END_SRC python
+  #+BEGIN_SRC python
+    subalgorithm insert(addressBook, item) is:
+    endsubalgorithm
+  #+END_SRC python
 
 
-#+BEGIN_SRC python
-  subalgorithm delete(addressBook, item) is:
-  endsubalgorithm
-#+END_SRC python
+  #+BEGIN_SRC python
+    subalgorithm search(addressBook, item) is:
+    endsubalgorithm
+  #+END_SRC python
 
 
-#+BEGIN_SRC python
-  subalgorithm list(addressBook) is:
-  endsubalgorithm
-#+END_SRC python
+  #+BEGIN_SRC python
+    subalgorithm delete(addressBook, item) is:
+    endsubalgorithm
+  #+END_SRC python
+
+
+  #+BEGIN_SRC python
+    subalgorithm list(addressBook) is:
+    endsubalgorithm
+  #+END_SRC python
 
 ** HashTable
   _HashTable_:
