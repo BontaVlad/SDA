@@ -1,0 +1,106 @@
+* Problem statement
+   A sorted list using a hashtable is a good data structure to implement a phone directory: given the name of the individual, find his phone number.
+   Create an application that allows a user to edit, search, and print entries on a in memory buffer representing an address book. The data structure will be a SortedList – implementation on a hash table, collision resolution by separate chaining. From a textual menu the user will choose one of the following operations: insert, delete, search, list. Each entry will have a name, address, and a phone number.
+   
+* Implementation
+
+** Address Book
+
+  _TItem_:
+    name: TString
+    phone_number: TString
+    address: TString
+  
+  _AddressBook_:
+    items: TItem[]
+    
+
+#+BEGIN_SRC python
+  subalgorithm init(addressBook, items) is:
+  endsubalgorithm
+#+END_SRC python
+    
+
+#+BEGIN_SRC python
+  subalgorithm insert(addressBook, item) is:
+  endsubalgorithm
+#+END_SRC python
+
+
+#+BEGIN_SRC python
+  subalgorithm search(addressBook, item) is:
+  endsubalgorithm
+#+END_SRC python
+
+
+#+BEGIN_SRC python
+  subalgorithm delete(addressBook, item) is:
+  endsubalgorithm
+#+END_SRC python
+
+
+#+BEGIN_SRC python
+  subalgorithm list(addressBook) is:
+  endsubalgorithm
+#+END_SRC python
+
+** HashTable
+  _HashTable_:
+    T: TKey[]
+    next: Integer[]
+    m: Integer
+    firstFree: Integer
+    h: TFunction
+    
+    #+BEGIN_SRC
+      subalgorithm insert (ht, k) is:
+        //pre: ht is a HashTable, k is a TKey
+        //post: k was added into ht
+        pos ← ht.h(k)
+        if ht.T[pos] = -1 then //-1 means empty position
+          ht.T[pos] ← k
+          ht.next[pos] ← -1
+        else
+          if ht.firstFree = ht.m then
+            @resize and rehash
+          end-if
+          current ← pos
+          while ht.next[current] 6= -1 execute
+            current ← ht.next[current]
+          end-while
+          ht.T[ht.firstFree] ← k
+          ht.next[ht.firstFree] ← - 1
+          ht.next[current] ← ht.firstFree
+          changeFirstFree(ht)
+        end-if
+      end-subalgorithm
+    #+END_SRC
+
+** Iterator Hash Table
+  _IteratorHT_:
+    ht: HashTable
+    currentPos: Integer
+    currentNode: ↑Node
+    
+  #+BEGIN_SRC
+    subalgorithm init(ith, ht) is:
+      //pre: ith is an IteratorHT, ht is a HashTable
+      ith.ht ← ht
+      ith.currentPos ← 0
+      while ith.currentPos < ht.m and ht.T[ith.currentPos] = NIL execute
+        ith.currentPos ← ith.currentPos + 1
+      end-while
+      if ith.currentPos < ht.m then
+        ith.currentNode ← ht.T[ith.currentPos]
+      else
+        ith.currentNode ← NIL
+      end-if
+    end-subalgorithm
+  #+END_SRC
+  
+  #+BEGIN_SRC
+  subalgorithm getCurrent(ith, elem) is:
+    elem ← [ith.currentNode].key
+  end-subalgorithm
+  #+END_SRC
+
