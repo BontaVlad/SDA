@@ -6,10 +6,11 @@
 
 ** Address Book
 
-  _TItem_:
-    name: TString
-    phone_number: TString
-    address: TString
+  ***TItem***
+  | field        | field type |
+  | name         | TString    |
+  | phone_number | TString    |
+  | address      | TString    |
   
   _AddressBook_:
     items: TItem[]
