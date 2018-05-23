@@ -6,13 +6,13 @@
 
 ** Address Book
 
-  *TItem*
-  ------
+  ***TItem
   | field        | field type |
   |--------------+------------|
   | name         | TString    |
   | phone_number | TString    |
   | address      | TString    |
+  ----------------------------------------------------------
   
   _AddressBook_:
     items: TItem[]
