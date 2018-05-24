@@ -1,6 +1,8 @@
 * Problem statement
    A sorted list using a hashtable is a good data structure to implement a phone directory: given the name of the individual, find his phone number.
    Create an application that allows a user to edit, search, and print entries on a in memory buffer representing an address book. The data structure will be a SortedList – implementation on a hash table, collision resolution by separate chaining. From a textual menu the user will choose one of the following operations: insert, delete, search, list. Each entry will have a name, address, and a phone number.
+   The problem with hash tables is that they don’t necessarily store the data in order. For example, if you have retrieved the phone number of “Smith, Jill”, you can’t expect the phone number of “Smith, John” to be nearby. 
+This can be a big problem in practice. It is especially bad if the hash table is on a high-latency medium, like a spinning disk. But it can also hurt you if you have a gigantic hash table in RAM.
    
 * Implementation
 
@@ -12,7 +14,6 @@
   | name         | TString    |
   | phone_number | TString    |
   | address      | TString    |
-  ----------------------------------------------------------
   
 **** AddressBook
   | field | field type |
@@ -25,24 +26,20 @@
     endsubalgorithm
   #+END_SRC python
 
-
   #+BEGIN_SRC python
     subalgorithm insert(addressBook, item) is:
     endsubalgorithm
   #+END_SRC python
-
 
   #+BEGIN_SRC python
     subalgorithm search(addressBook, item) is:
     endsubalgorithm
   #+END_SRC python
 
-
   #+BEGIN_SRC python
     subalgorithm delete(addressBook, item) is:
     endsubalgorithm
   #+END_SRC python
-
 
   #+BEGIN_SRC python
     subalgorithm list(addressBook) is:
@@ -50,12 +47,14 @@
   #+END_SRC python
 
 ** HashTable
-  _HashTable_:
-    T: TKey[]
-    next: Integer[]
-    m: Integer
-    firstFree: Integer
-    h: TFunction
+*** HashTable
+  | field      | field type |
+  |------------+------------|
+  | T          | TKey[]     |
+  | next       | Integer[]  |
+  | m          | Integer    |
+  | firstFree  | Integer    |
+  | h          | TFunction  |
     
     #+BEGIN_SRC
       subalgorithm insert (ht, k) is:
@@ -82,10 +81,12 @@
     #+END_SRC
 
 ** Iterator Hash Table
-  _IteratorHT_:
-    ht: HashTable
-    currentPos: Integer
-    currentNode: ↑Node
+*** IteratorHT
+  | field        | field type |
+  |--------------+------------|
+  | ht:          | HashTable  |
+  | currentPos:  | Integer    |
+  | currentNode: | ↑Node      |
     
   #+BEGIN_SRC
     subalgorithm init(ith, ht) is:
