@@ -1,14 +1,21 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <iostream>
+#include <algorithm>
 
 using namespace std;
 
 #include "ui.h"
+#include "../repository/entry.h"
 
-Ui::Ui() {}
+Ui::Ui(Repository *repo) {
+  this->repo = repo;
+}
 
-Ui::~Ui() {}
+Ui::~Ui() {
+  delete(this->repo);
+}
 
 void showHeader()
 {
@@ -42,11 +49,29 @@ void Ui::showMenu() {
   } while (cmd != '0');
 }
 
-void handleAddingEntry(){
+void Ui::handleAddingEntry(){
+  string score;
+  string name;
+  string email;
   cout << "\n\n"
        << "Adding an entry\n"
        <<"----------------\n";
 
+  cin.ignore(numeric_limits<streamsize>::max(), '\n');
+  cout << "Enter the score of the entry: ";
+  std::getline(std::cin, score);
+
+  cin.ignore(numeric_limits<streamsize>::max(), '\n');
+  cout << "Enter the name of the entry: ";
+  std::getline(std::cin, name);
+
+  cin.ignore(numeric_limits<streamsize>::max(), '\n');
+  cout << "Enter the email of the entry: ";
+  std::getline(std::cin, email);
+
+  auto entry = new Entry(std::stoi(score), name, email);
+  repo->addEntry(*entry);
+  cout << "Entry added";
   cout << "\n\n";
   return;
 }
@@ -55,21 +80,28 @@ void handleRemoveEntry(){
   cout << "\n\n"
        << "Removing an entry\n"
        <<"----------------\n";
-
   cout << "\n\n";
   return;
 }
 
 
-void handleListEntries(){
+void Ui::handleListEntries(){
   cout << "\n\n"
        << "Listing entries\n"
        <<"----------------\n";
-  cout << setw(7) << "Sl. No:" << setw(15) << "Month" << setw(15) << "Name" << endl << endl;
-  cout << setw(7) << 1 << setw(15) << "January" << setw(15) << "Abhilash" << endl;
-  cout << setw(7) << 2 << setw(15) << "Februaury" << setw(15) << "Anandan" << endl;
-  cout << setw(7) << 3 << setw(15) << "March" << setw(15) << "Abhilash" << endl;
-  cout << setw(7) << 4 << setw(15) << "April" << setw(15) << "Anandan" << endl;
+  auto entries = repo->listEntries();
+
+  cout << setw(7) << "Sl. No:" << setw(15) << "Name" << setw(15) << "Email" << endl << endl;
+  std::for_each(entries.begin(), entries.end(), [](const auto &e) {
+                                                  // cout << e.score;
+                                                  // cout << e.name;
+                                                  // cout << e.email;
+        cout << setw(7) << e.score << setw(15) << e.name << setw(15) << e.email << endl;
+  });
+  // cout << setw(7) << 1 << setw(15) << "January" << setw(15) << "Abhilash" << endl;
+  // cout << setw(7) << 2 << setw(15) << "Februaury" << setw(15) << "Anandan" << endl;
+  // cout << setw(7) << 3 << setw(15) << "March" << setw(15) << "Abhilash" << endl;
+  // cout << setw(7) << 4 << setw(15) << "April" << setw(15) << "Anandan" << endl;
   cout << "\n\n";
   return;
 }

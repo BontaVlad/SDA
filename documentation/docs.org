@@ -15,6 +15,8 @@ This can be a big problem in practice. It is especially bad if the hash table is
   | phone_number | TString    |
   | address      | TString    |
   
+  r@&
+  == != ==>
 **** AddressBook
   | field | field type |
   |-------+------------|
@@ -47,6 +49,7 @@ This can be a big problem in practice. It is especially bad if the hash table is
   #+END_SRC python
 
 ** HashTable
+   
 *** HashTable
   | field      | field type |
   |------------+------------|
@@ -81,6 +84,7 @@ This can be a big problem in practice. It is especially bad if the hash table is
     #+END_SRC
 
 ** Iterator Hash Table
+   
 *** IteratorHT
   | field        | field type |
   |--------------+------------|
@@ -110,3 +114,127 @@ This can be a big problem in practice. It is especially bad if the hash table is
   end-subalgorithm
   #+END_SRC
 
+Sorted List ADT Specification
+---
+Structure:
+The list elements are of ItemType. The list has a special property
+called  the  
+current  position
+—the  position  of  the  last  element
+accessed  by  
+GetNextItem
+during  an  iteration  through  the  list.
+Only 
+ResetList
+and 
+GetNextItem
+affect the current position.
+Definitions (provided by user in class ItemType):
+MAX_ITEMS:
+A  constant  specifying  the  maximum  number
+of items in the list
+RelationType:
+An  enumeration  type  that  consists  of  LESS,
+GREATER, EQUAL
+Member function of ItemType that must be included:
+RelationType ComparedTo(ItemType item)
+Function:
+Determines   the   ordering   of   two   ItemType
+objects based on their keys.
+Precondition:
+Self and item have their key members initialized.
+© Jones and Bartlett Publishers. NOT FOR SALE OR DISTRIBUTION
+4.1 Abstract Data Type Sorted List
+|
+193
+Postcondition:
+Function value   = LESS if the key of self is less than the key of
+item.
+=  GREATER  if  the  key  of  self  is  greater  than
+the key of item.
+= EQUAL if the keys are equal.
+Operations (provided by Sorted List ADT)
+MakeEmpty
+Function:
+Initializes list to empty state.
+Preconditions:
+None
+Postcondition:
+List is empty.
+Boolean IsFull
+Function:
+Determines whether list is full.
+Precondition:
+List has been initialized.
+Postcondition:
+Function value = (list is full)
+int GetLength
+Function:
+Determines the number of elements in list.
+Precondition:
+List has been initialized.
+Postcondition:
+Function value = number of elements in list
+RetrieveItem (ItemType& item , Boolean& found)
+Function:
+Retrieves   list   element   whose   key   matches
+item’s key (if present).
+Preconditions:
+List has been initialized.
+Key member of item is initialized.
+Postconditions:
+If  there  is  an  element  someItem  whose  key
+matches  item’s  key,  then  found  =  true  and
+item is a copy of someItem; otherwise found =
+false and item is unchanged.
+List is unchanged.
+InsertItem (ItemType item )
+Function:
+Adds item to list.
+Preconditions:
+List has been initialized.
+List is not full.
+item is not in list.
+List  is  sorted  by  key  member  using  function
+ComparedTo.
+Postconditions:
+item is in list.
+List is still sorted.
+41582_CH04_DALECPP.qxd  9/22/06  11:04 AM  Page 193
+© Jones and Bartlett Publishers. NOT FOR SALE OR DISTRIBUTION
+194
+|
+Chapter 4:  ADT Sorted List
+DeleteItem (ItemType item )
+Function:
+Deletes the element whose key matches item’s
+key.
+Preconditions:
+List has been initialized.
+Key member of item is initialized.
+List  is  sorted  by  key  member  using  function
+ComparedTo.
+One  and  only  one  element  in  list  has  a  key
+matching item’s key.
+Postconditions:
+No  element  in  list  has  key  matching  item’s
+key.
+List is still sorted.
+ResetList
+Function:
+Initializes  current  position  for  an  iteration
+through the list.
+Precondition:
+List has been initialized.
+Postcondition:
+Current position is prior to list.
+GetNextItem (ItemType& item )
+Function:
+Gets the next element in list.
+Preconditions:
+List has been initialized.
+Current position is defined.
+Element at current position is not last in list.
+Postconditions:
+Current position is updated to next position.
+item is a copy of element at current 
