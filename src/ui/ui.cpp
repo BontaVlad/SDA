@@ -20,12 +20,12 @@ Ui::~Ui() {
 void showHeader()
 {
     cout <<"================================================================" << endl;
-    cout << "8\"\"\"\"8                        8\"\"\"\"8                           "<< endl;
-    cout << "8      eeee eeeee eeeee  eeee 8    8   eeeee eeeee eeeee  eeeee"<< endl;
-    cout << "8eeeee 8  8 8  88 8   8  8    8eeee8ee 8  88 8   8 8   8  8   8"<< endl;
-    cout << "    88 8e   8   8 8eee8e 8eee 88     8 8   8 8eee8 8eee8e 8e  8"<< endl;
-    cout << "e   88 88   8   8 88   8 88   88     8 8   8 88  8 88   8 88  8"<< endl;
-    cout << "8eee88 88e8 8eee8 88   8 88ee 88eeeee8 8eee8 88  8 88   8 88ee8"<< endl;
+    cout << "8\"\"\"\"8                        8\"\"\"\"8                   " << endl;
+    cout << "8      eeee eeeee eeeee  eeee 8    8   eeeee eeeee eeeee  eeeee" << endl;
+    cout << "8eeeee 8  8 8  88 8   8  8    8eeee8ee 8  88 8   8 8   8  8   8" << endl;
+    cout << "    88 8e   8   8 8eee8e 8eee 88     8 8   8 8eee8 8eee8e 8e  8" << endl;
+    cout << "e   88 88   8   8 88   8 88   88     8 8   8 88  8 88   8 88  8" << endl;
+    cout << "8eee88 88e8 8eee8 88   8 88ee 88eeeee8 8eee8 88  8 88   8 88ee8" << endl;
     cout <<"================================================================" << endl;
 
 }
@@ -77,9 +77,13 @@ void Ui::handleAddingEntry(){
 }
 
 void handleRemoveEntry(){
+  string name;
   cout << "\n\n"
        << "Removing an entry\n"
        <<"----------------\n";
+  cin.ignore(numeric_limits<streamsize>::max(), '\n');
+  cout << "Enter the name of the entry: ";
+  std::getline(std::cin, name);
   cout << "\n\n";
   return;
 }
@@ -93,15 +97,8 @@ void Ui::handleListEntries(){
 
   cout << setw(7) << "Sl. No:" << setw(15) << "Name" << setw(15) << "Email" << endl << endl;
   std::for_each(entries.begin(), entries.end(), [](const auto &e) {
-                                                  // cout << e.score;
-                                                  // cout << e.name;
-                                                  // cout << e.email;
         cout << setw(7) << e.score << setw(15) << e.name << setw(15) << e.email << endl;
   });
-  // cout << setw(7) << 1 << setw(15) << "January" << setw(15) << "Abhilash" << endl;
-  // cout << setw(7) << 2 << setw(15) << "Februaury" << setw(15) << "Anandan" << endl;
-  // cout << setw(7) << 3 << setw(15) << "March" << setw(15) << "Abhilash" << endl;
-  // cout << setw(7) << 4 << setw(15) << "April" << setw(15) << "Anandan" << endl;
   cout << "\n\n";
   return;
 }
