@@ -5,7 +5,7 @@
 #include "repository.h"
 
 Repository::Repository() {}
-Repository::~Repository() {}
+// Repository::~Repository() {}
 int Repository::compareTo(Entry first, Entry second) {return true;};
 bool Repository::isFull() {return false;};
 int Repository::length() {return 0;};
@@ -15,7 +15,7 @@ Entry Repository::next(Entry entry) {};
 
 bool Repository::insert(Entry* entry)
 {
-  entries.add(entry->email, entry);
+  entries.add(entry);
   return true;
 }
 

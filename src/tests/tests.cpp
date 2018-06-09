@@ -164,11 +164,13 @@ TEST_CASE( "HashTable", "[adding, deleting, searching, sorting]" ) {
     auto entry_6 = new Entry(999, "Mu Lan", "disney@disney.com");
     auto entry_7 = new Entry(12345, "Zhou Ma", "kill_bill@movie.com");
 
-    ht->add(entry_1->email, entry_1);
-    ht->add(entry_2->email, entry_1);
-    ht->add(entry_3->email, entry_1);
-    ht->add(entry_4->email, entry_1);
-    REQUIRE(ht->count() == 4);
+    ht->add(entry_1);
+    ht->add(entry_2);
+    ht->add(entry_3);
+    ht->add(entry_4);
+    ht->add(entry_5);
+    ht->add(entry_6);
+    REQUIRE(ht->count() == 6);
   }
 
   SECTION("Remove from hashTable") {
@@ -182,12 +184,38 @@ TEST_CASE( "HashTable", "[adding, deleting, searching, sorting]" ) {
     auto entry_6 = new Entry(999, "Mu Lan", "disney@disney.com");
     auto entry_7 = new Entry(12345, "Zhou Ma", "kill_bill@movie.com");
 
-    ht->add(entry_1->email, entry_1);
-    ht->add(entry_2->email, entry_2);
-    ht->add(entry_3->email, entry_3);
-    ht->add(entry_4->email, entry_4);
+    ht->add(entry_1);
+    ht->add(entry_2);
+    ht->add(entry_3);
+    ht->add(entry_4);
+    REQUIRE(ht->count() == 4);
     ht->remove(entry_4->email);
     ht->remove(entry_1->email);
     REQUIRE(ht->count() == 2);
   }
+
+  // SECTION("Test HT iterator") {
+  //   auto ht = new HashTable();
+  //   auto iter = new HashTableIterator(ht);
+
+  //   auto entry_1 = new Entry(1, "Zhāng Li", "babyboy@yahoo.com");
+  //   auto entry_2 = new Entry(10, "Wang Chu", "i_hate_monday@gmail.com");
+  //   auto entry_3 = new Entry(30, "Lao Liew", "nospam@hotmail.com");
+  //   auto entry_4 = new Entry(20, "Yang Gi", "notworthy@gmail.com");
+  //   auto entry_5 = new Entry(10, "Wu Tang", "serious_sam@gmail.com");
+  //   auto entry_6 = new Entry(999, "Mu Lan", "disney@disney.com");
+  //   auto entry_7 = new Entry(12345, "Zhou Ma", "kill_bill@movie.com");
+
+  //   ht->add(entry_1->email, entry_1);
+  //   ht->add(entry_2->email, entry_2);
+  //   ht->add(entry_3->email, entry_3);
+  //   ht->add(entry_4->email, entry_4);
+  //   ht->add(entry_5->email, entry_4);
+  //   ht->add(entry_6->email, entry_4);
+  //   ht->add(entry_7->email, entry_4);
+
+  //   while(iter->next() != NULL) {
+  //     cout << iter->currentNode->data->email << endl;
+  //   }
+  // }
 }

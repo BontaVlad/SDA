@@ -32,7 +32,7 @@ private:
 
 class Iterator
 {
-  fried class Repository;
+  friend class Repository;
  private:
   int current;
   Repository* repo;
@@ -43,26 +43,26 @@ class Iterator
     this->repo = repo;
   }
 
-	bool valid(){
-		if(current < M && dict->keys[current] != "")
-			return true;
-		return false;
-	}
+	/* bool valid(){ */
+	/* 	if(current < M && dict->keys[current] != "") */
+	/* 		return true; */
+	/* 	return false; */
+	/* } */
 
-  int getNext()
-  {
-    while(repo->items[this->current] == "")
-    {
-        this->current++;
-    }
-  }
+  /* int getNext() */
+  /* { */
+  /*   while(repo->items[this->current] == "") */
+  /*   { */
+  /*       this->current++; */
+  /*   } */
+  /* } */
 
-  void first() {
-    current = 0;
-    while(repo->items[current] == "")
-      {
-        current++;
-      }
-  }
+  /* void first() { */
+  /*   current = 0; */
+  /*   while(repo->items[current] == "") */
+  /*     { */
+  /*       current++; */
+  /*     } */
+  /* } */
 
 };

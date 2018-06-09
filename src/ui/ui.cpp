@@ -13,9 +13,9 @@ Ui::Ui(Repository *repo) {
   this->repo = repo;
 }
 
-Ui::~Ui() {
-  delete(this->repo);
-}
+// Ui::~Ui() {
+//   delete(this->repo);
+// }
 
 void showHeader()
 {
