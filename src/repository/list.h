@@ -14,9 +14,8 @@ public:
 
 class List
 {
-private:
-  Node *head, *tail;
 public:
+  Node *head, *tail;
   List()
   {
     head=NULL;
@@ -26,6 +25,7 @@ public:
   void insertFirst(Entry* value);
   Node* deleteFirst();
   Node* deleteElement(Entry* element);
+  Node* getElement(string email);
   void sort();
   int count();
 };

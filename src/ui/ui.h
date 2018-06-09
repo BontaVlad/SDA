@@ -17,4 +17,5 @@ public:
   void handleAddingEntry();
   void handleListEntries();
   void handleInsertTestData();
+  void handleRemoveEntry();
 };

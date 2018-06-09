@@ -13,19 +13,18 @@ Entry Repository::retrive(string name) {};
 void Repository::reset() {};
 Entry Repository::next(Entry entry) {};
 
-bool Repository::insert(Entry entry)
+bool Repository::insert(Entry* entry)
 {
-  entries.push_back(entry);
+  entries.add(entry->email, entry);
   return true;
 }
 
-void Repository::remove(string name)
+void Repository::remove(string email)
 {
-  std::cout << name << std::endl;
-  entries.erase(entries.begin());
+  entries.remove(email);
 }
 
-std::vector<Entry> Repository::list()
-{
-  return entries;
-}
+// std::vector<Entry> Repository::list()
+// {
+//   return entries;
+// }

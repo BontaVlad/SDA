@@ -70,21 +70,22 @@ void Ui::handleAddingEntry(){
   std::getline(std::cin, email);
 
   auto entry = new Entry(std::stoi(score), name, email);
-  repo->insert(*entry);
+  repo->insert(entry);
   cout << "Citizen added";
   cout << "\n\n";
   return;
 }
 
-void handleRemoveEntry(){
-  string name;
+void Ui::handleRemoveEntry(){
+  string email;
   cout << "\n\n"
        << "Removing an citizen\n"
        <<"----------------\n";
   cin.ignore(numeric_limits<streamsize>::max(), '\n');
-  cout << "Enter the name of the citizen: ";
-  std::getline(std::cin, name);
+  cout << "Enter the email of the citizen: ";
+  std::getline(std::cin, email);
   cout << "\n\n";
+  repo->remove(email);
   return;
 }
 
@@ -97,13 +98,13 @@ void Ui::handleInsertTestData() {
   auto entry_6 = new Entry(999, "Mu Lan", "disney@disney.com");
   auto entry_7 = new Entry(12345, "Zhou Ma", "kill_bill@movie.com");
 
-  repo->insert(*entry_1);
-  repo->insert(*entry_2);
-  repo->insert(*entry_3);
-  repo->insert(*entry_4);
-  repo->insert(*entry_5);
-  repo->insert(*entry_6);
-  repo->insert(*entry_7);
+  repo->insert(entry_1);
+  repo->insert(entry_2);
+  repo->insert(entry_3);
+  repo->insert(entry_4);
+  repo->insert(entry_5);
+  repo->insert(entry_6);
+  repo->insert(entry_7);
   cout << "Created agents of the goverment" << endl;
 }
 
@@ -113,12 +114,12 @@ void Ui::handleListEntries(){
   cout << "\n\n"
        << "Listing entries\n"
        <<"----------------\n";
-  auto entries = repo->list();
+  // auto entries = repo->list();
 
-  cout << setw(spacing) << "Sl. No" << setw(spacing) << "Name" << setw(spacing) << "Email" << endl << endl;
-  std::for_each(entries.begin(), entries.end(), [](const auto &e) {
-        cout << setw(spacing) << e.score << setw(spacing) << e.name << setw(spacing) << e.email << endl;
-  });
+  // cout << setw(spacing) << "Sl. No" << setw(spacing) << "Name" << setw(spacing) << "Email" << endl << endl;
+  // std::for_each(entries.begin(), entries.end(), [](const auto &e) {
+  //       cout << setw(spacing) << e.score << setw(spacing) << e.name << setw(spacing) << e.email << endl;
+  // });
   cout << "\n\n";
   return;
 }

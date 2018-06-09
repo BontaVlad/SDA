@@ -1,5 +1,6 @@
 #include "list.h"
 #include "entry.h"
+#include <iostream>
 
 Node::Node() {};
 Node::~Node() {};
@@ -42,14 +43,15 @@ Node* List::deleteFirst()
 
 Node* List::deleteElement(Entry* element)
 {
-  auto *curr = this->head;
-  Node *prev;
+  Node *curr = this->head;
+  Node *prev = NULL;
   while (curr != NULL and curr->data->email != element->email) {
     prev = curr;
     curr = curr->next;
   }
   if (prev == NULL) {
     curr = deleteFirst();
+    this->head = NULL;
   }
   else if (curr != NULL) {
     prev->next = curr->next;
@@ -58,42 +60,56 @@ Node* List::deleteElement(Entry* element)
   return curr;
 }
 
+
+Node* List::getElement(string email)
+{
+  auto *curr = this->head;
+  Node *prev;
+  while (curr != NULL) {
+    if (curr->data->email == email) {
+      return curr;
+    }
+    prev = curr;
+    curr = curr->next;
+  }
+  return NULL;
+}
+
 void List::sort()
 {
   Node* curr;
   Node* prev;
-    for(bool didSwap = true; didSwap; ) {
-        didSwap = false;
-        prev = head;
-        for(curr = head; curr->next != NULL; curr = curr->next) {
-                if(curr->data->score > curr->next->data->score) {
-                        if (head == curr) {
-                            head = curr->next;
-                            curr->next = head->next;
-                            head->next = curr;
-                            prev = head;
-                        } else {
-                            prev->next = curr->next;
-                            curr->next = prev->next->next;
-                            prev->next->next = curr;
-                        }
-                        didSwap = true;
-                } else if (head != curr) {
-                    prev = prev->next;
-                }
+  for(bool didSwap = true; didSwap; )
+  {
+    didSwap = false;
+    prev = this->head;
+    for(curr = this->head; curr->next != NULL; curr = curr->next)
+    {
+      if(curr->data->score > curr->next->data->score) {
+        cout << curr->next->data->score << endl;
+        if (this->head == curr) {
+            this->head = curr->next;
+            curr->next = head->next;
+            this->head->next = curr;
+            prev = head;
+        } else {
+            prev->next = curr->next;
+            curr->next = prev->next->next;
+            prev->next->next = curr;
         }
+        didSwap = true;
+      } else if (head != curr) {
+          prev = prev->next;
+      }
     }
+  }
 }
 
 int List::count()
 {
-  if (this->head == NULL) {
-    return 0;
-  }
-
-  int num = 1;
+  int num = 0;
   Node* curr;
-  for(curr = this->head; curr->next != NULL; curr = curr->next) {
+  for(curr = this->head; curr != NULL; curr = curr->next) {
     num = num + 1;
   }
   return num;
