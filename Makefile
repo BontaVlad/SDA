@@ -1,4 +1,4 @@
-appname := contents
+appname := social_score
 
 CXX := clang++
 CXXFLAGS := -std=c++17

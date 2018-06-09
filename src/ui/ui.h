@@ -16,4 +16,5 @@ public:
   void executeMenu(char cmd);
   void handleAddingEntry();
   void handleListEntries();
+  void handleInsertTestData();
 };

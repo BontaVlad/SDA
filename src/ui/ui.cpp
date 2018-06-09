@@ -35,10 +35,10 @@ void Ui::showMenu() {
   do {
     showHeader();
     cout << "Main menu:\n";
-    cout << "1. Add a new entry\n";
-    cout << "2. Remove an entry\n";
+    cout << "1. Add a new citizen\n";
+    cout << "2. Remove an citizen\n";
     cout << "3. View all entries\n";
-    cout << "4. Search for an entry\n";
+    cout << "4. Search for an citizen\n";
     cout << "0. Exit\n\n";
 
     cout << "Please enter comand: ";
@@ -54,24 +54,24 @@ void Ui::handleAddingEntry(){
   string name;
   string email;
   cout << "\n\n"
-       << "Adding an entry\n"
-       <<"----------------\n";
+       << "Adding a new citizen\n"
+       <<"---------------------\n";
 
   cin.ignore(numeric_limits<streamsize>::max(), '\n');
-  cout << "Enter the score of the entry: ";
+  cout << "Enter the score of the citizen: ";
   std::getline(std::cin, score);
 
   cin.ignore(numeric_limits<streamsize>::max(), '\n');
-  cout << "Enter the name of the entry: ";
+  cout << "Enter the name of the citizen: ";
   std::getline(std::cin, name);
 
   cin.ignore(numeric_limits<streamsize>::max(), '\n');
-  cout << "Enter the email of the entry: ";
+  cout << "Enter the email of the citizen: ";
   std::getline(std::cin, email);
 
   auto entry = new Entry(std::stoi(score), name, email);
-  repo->addEntry(*entry);
-  cout << "Entry added";
+  repo->insert(*entry);
+  cout << "Citizen added";
   cout << "\n\n";
   return;
 }
@@ -79,25 +79,45 @@ void Ui::handleAddingEntry(){
 void handleRemoveEntry(){
   string name;
   cout << "\n\n"
-       << "Removing an entry\n"
+       << "Removing an citizen\n"
        <<"----------------\n";
   cin.ignore(numeric_limits<streamsize>::max(), '\n');
-  cout << "Enter the name of the entry: ";
+  cout << "Enter the name of the citizen: ";
   std::getline(std::cin, name);
   cout << "\n\n";
   return;
 }
 
+void Ui::handleInsertTestData() {
+  auto entry_1 = new Entry(1, "Zhāng Li", "babyboy@yahoo.com");
+  auto entry_2 = new Entry(10, "Wang Chu", "i_hate_monday@gmail.com");
+  auto entry_4 = new Entry(30, "Lao Liew", "nospam@hotmail.com");
+  auto entry_5 = new Entry(20, "Yang Gi", "notworthy@gmail.com");
+  auto entry_3 = new Entry(10, "Wu Tang", "serious_sam@gmail.com");
+  auto entry_6 = new Entry(999, "Mu Lan", "disney@disney.com");
+  auto entry_7 = new Entry(12345, "Zhou Ma", "kill_bill@movie.com");
+
+  repo->insert(*entry_1);
+  repo->insert(*entry_2);
+  repo->insert(*entry_3);
+  repo->insert(*entry_4);
+  repo->insert(*entry_5);
+  repo->insert(*entry_6);
+  repo->insert(*entry_7);
+  cout << "Created agents of the goverment" << endl;
+}
+
 
 void Ui::handleListEntries(){
+  const int spacing = 30;
   cout << "\n\n"
        << "Listing entries\n"
        <<"----------------\n";
-  auto entries = repo->listEntries();
+  auto entries = repo->list();
 
-  cout << setw(7) << "Sl. No:" << setw(15) << "Name" << setw(15) << "Email" << endl << endl;
+  cout << setw(spacing) << "Sl. No" << setw(spacing) << "Name" << setw(spacing) << "Email" << endl << endl;
   std::for_each(entries.begin(), entries.end(), [](const auto &e) {
-        cout << setw(7) << e.score << setw(15) << e.name << setw(15) << e.email << endl;
+        cout << setw(spacing) << e.score << setw(spacing) << e.name << setw(spacing) << e.email << endl;
   });
   cout << "\n\n";
   return;
@@ -106,7 +126,7 @@ void Ui::handleListEntries(){
 
 void handleSearchEntry(){
   cout << "\n\n"
-       << "Searching for an entry\n"
+       << "Searching for an citizen\n"
        <<"----------------\n";
 
   cout << "\n\n";
@@ -129,6 +149,10 @@ void Ui::executeMenu(char cmd) {
   }
   case '4': {
     handleSearchEntry();
+    break;
+  }
+  case '9': {
+    handleInsertTestData();
     break;
   }
   case '0': {
