@@ -105,7 +105,7 @@ void Ui::handleInsertTestData() {
   repo->insert(entry_5);
   repo->insert(entry_6);
   repo->insert(entry_7);
-  cout << "Created agents of the goverment" << endl;
+  cout << "Created " << repo->length() << " agents of the goverment" << endl;
 }
 
 
@@ -114,12 +114,15 @@ void Ui::handleListEntries(){
   cout << "\n\n"
        << "Listing entries\n"
        <<"----------------\n";
-  // auto entries = repo->list();
+  auto iter = repo->list();
+  Entry* e;
 
-  // cout << setw(spacing) << "Sl. No" << setw(spacing) << "Name" << setw(spacing) << "Email" << endl << endl;
-  // std::for_each(entries.begin(), entries.end(), [](const auto &e) {
-  //       cout << setw(spacing) << e.score << setw(spacing) << e.name << setw(spacing) << e.email << endl;
-  // });
+  cout << setw(spacing) << "Sl. No" << setw(spacing) << "Name" << setw(spacing) << "Email" << endl << endl;
+  while(iter->valid()) {
+    e = iter->getCurrent()->data;
+    cout << setw(spacing) << e->score << setw(spacing) << e->name << setw(spacing) << e->email << endl;
+    iter->next();
+  }
   cout << "\n\n";
   return;
 }

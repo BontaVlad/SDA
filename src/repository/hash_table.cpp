@@ -22,8 +22,10 @@ void HashTable::add(Entry *value) {
 
   if (this->keys->getElement(value->email) == NULL) {
     this->keys->insertFirst(value);
+    this->keys->sort();
     this->values[index] = new List();
     this->values[index]->insertFirst(value);
+    this->values[index]->sort();
   } else {
     this->values[index]->insertFirst(value);
   }
@@ -40,9 +42,9 @@ void HashTable::remove(string key) {
   auto elem = this->values[index]->getElement(key)->data;
   if (elem != NULL) {
     this->values[index]->deleteElement(elem);
-    // if (this->values[index]->count() == 0) {
-    //   this->keys->deleteElement(elem);
-    // }
+    if (this->values[index]->count() == 0) {
+      this->keys->deleteElement(elem);
+    }
   }
 }
 
@@ -68,12 +70,15 @@ bool HashTableIterator::valid() {
     return false;
   }
   if (this->current == NULL) {
+    // cout << "current is NULL" << endl;
     return false;
   }
   if (this->currentKey->next == NULL) {
+    // cout << "currentKey->next is NULL" << endl;
     return false;
   }
   if (this->current == NULL) {
+    // cout << "current is NULL" << endl;
     return false;
   }
   return true;
@@ -85,6 +90,11 @@ Node* HashTableIterator::next() {
       return NULL;
     }
     this->currentKey = ht->keys->head;
+    auto index = this->ht->hash(currentKey->data->email);
+    this->current = this->ht->values[index]->head;
+    return this->current;
+  }
+  if (this->current == NULL) {
     auto index = this->ht->hash(currentKey->data->email);
     this->current = this->ht->values[index]->head;
     return this->current;

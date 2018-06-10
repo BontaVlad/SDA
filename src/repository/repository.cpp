@@ -4,27 +4,31 @@
 #include "entry.h"
 #include "repository.h"
 
-Repository::Repository() {}
+Repository::Repository(HashTable* ht) {
+  this->entries = ht;
+}
 // Repository::~Repository() {}
 int Repository::compareTo(Entry first, Entry second) {return true;};
 bool Repository::isFull() {return false;};
-int Repository::length() {return 0;};
+int Repository::length() {
+  return this->entries->count();
+};
 Entry Repository::retrive(string name) {};
-void Repository::reset() {};
-Entry Repository::next(Entry entry) {};
 
 bool Repository::insert(Entry* entry)
 {
-  entries.add(entry);
+  entries->add(entry);
   return true;
 }
 
 void Repository::remove(string email)
 {
-  entries.remove(email);
+  entries->remove(email);
 }
 
-// std::vector<Entry> Repository::list()
-// {
-//   return entries;
-// }
+HashTableIterator* Repository::list()
+{
+  HashTableIterator* iter = new HashTableIterator(entries);
+  iter->next();
+  return iter;
+}

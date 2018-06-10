@@ -132,16 +132,22 @@ TEST_CASE( "List", "[adding, deleting, searching, sorting]" ) {
     auto entry_6 = new Entry(999, "Mu Lan", "disney@disney.com");
     auto entry_7 = new Entry(12345, "Zhou Ma", "kill_bill@movie.com");
 
-    list->insertFirst(entry_1);
-    list->insertFirst(entry_2);
-    list->insertFirst(entry_3);
+    // list->insertFirst(entry_2);
     list->insertFirst(entry_4);
     list->insertFirst(entry_5);
-    list->insertFirst(entry_6);
-    list->insertFirst(entry_7);
+    list->insertFirst(entry_1);
+    // list->insertFirst(entry_6);
+    // list->insertFirst(entry_7);
+    // list->insertFirst(entry_3);
 
-    REQUIRE(list->count() == 7);
-    // list->sort();
+    // REQUIRE(list->count() == 7);
+    list->sort();
+    // REQUIRE(list->head->data->score == 12345);
+    // REQUIRE(list->head->next->data->score == 999);
+    // REQUIRE(list->head->next->next->data->score == 30);
+    // REQUIRE(list->head->next->next->next->data->score == 10);
+    // REQUIRE(list->head->next->data->score == 10);
+    // REQUIRE(list->head->data->score == 1);
   }
 }
 
@@ -234,14 +240,14 @@ TEST_CASE( "HashTable", "[adding, deleting, searching, sorting]" ) {
 
     iter->next();
     REQUIRE(iter->valid() == true);
-    REQUIRE(iter->getCurrent()->data->email == "nospam@hotmail.com");
+    REQUIRE(iter->getCurrent()->data->email == entry_3->email);
 
     iter->next();
     REQUIRE(iter->valid() == true);
-    REQUIRE(iter->getCurrent()->data->email == "i_hate_monday@gmail.com");
+    REQUIRE(iter->getCurrent()->data->email == entry_4->email);
 
     iter->next();
     REQUIRE(iter->valid() == true);
-    REQUIRE(iter->getCurrent()->data->email == "babyboy@yahoo.com");
+    REQUIRE(iter->getCurrent()->data->email == entry_2->email);
   }
 }
