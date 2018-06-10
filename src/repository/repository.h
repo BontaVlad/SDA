@@ -14,7 +14,7 @@ public:
   bool isFull();
   int length();
   bool insert(Entry* entry);
-  Entry retrive(string name);
+  Entry* retrive(string name);
   void remove(string name);
   void reset();
   Entry next(Entry entry);

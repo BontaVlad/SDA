@@ -13,7 +13,6 @@ bool Repository::isFull() {return false;};
 int Repository::length() {
   return this->entries->count();
 };
-Entry Repository::retrive(string name) {};
 
 bool Repository::insert(Entry* entry)
 {
@@ -32,3 +31,7 @@ HashTableIterator* Repository::list()
   iter->next();
   return iter;
 }
+
+Entry* Repository::retrive(string name) {
+  return entries->get(name);
+};

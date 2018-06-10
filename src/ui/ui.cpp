@@ -128,11 +128,19 @@ void Ui::handleListEntries(){
 }
 
 
-void handleSearchEntry(){
+void Ui::handleSearchEntry(){
+  string email;
+  const int spacing = 30;
   cout << "\n\n"
        << "Searching for an citizen\n"
        <<"----------------\n";
-
+  cin.ignore(numeric_limits<streamsize>::max(), '\n');
+  cout << "Enter the email of the citizen you want to search: ";
+  std::getline(std::cin, email);
+  cout << "\n\n";
+  Entry* e = repo->retrive(email);
+  cout << setw(spacing) << "Sl. No" << setw(spacing) << "Name" << setw(spacing) << "Email" << endl << endl;
+  cout << setw(spacing) << e->score << setw(spacing) << e->name << setw(spacing) << e->email << endl;
   cout << "\n\n";
   return;
 }
