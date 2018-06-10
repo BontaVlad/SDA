@@ -1,8 +1,9 @@
 appname := social_score
 
 CXX := clang++
-CXXFLAGS := -std=c++17
-TEST_CXXFLAGS := -std=c++17 -fprofile-instr-generate -fcoverage-mapping
+# CXXFLAGS := -std=c++17
+# TEST_CXXFLAGS := -std=c++17 -ftest-coverage -fprofile-instr-generate -fcoverage-mapping
+CXXFLAGS := -std=c++17 -ftest-coverage -fprofile-instr-generate -fcoverage-mapping
 LDFLAGS=
 
 srcfiles := $(shell find . ! -name "tests.cpp" -name "*.cpp")
@@ -18,7 +19,7 @@ $(appname): $(objects)
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $(appname) $(objects) $(LDLIBS) $(LDFLAGS)
 
 tests: $(test_objects)
-	$(CXX) $(TEST_CXXFLAGS) $(LDFLAGS) -o tests $(test_objects) $(LDLIBS) $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o tests $(test_objects) $(LDLIBS) $(LDFLAGS)
 
 depend: .depend
 

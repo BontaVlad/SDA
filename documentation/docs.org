@@ -11,7 +11,7 @@ It's part of a broad effort in China to build a so-called reputation system that
 
 Since we are dealing with a huge data set we need fast inserts, fast look-ups, and some way to keep storage space low. We also want to sort the data set according to each citizens score. For managing this huge undertaking I chose a Sorted list with a hash table as an implementation.
 * Implementation
-** Census
+** Social Credit Score
 *** TEntry
   #+ATTR_LaTeX: :center nil
   | field | field type |
@@ -20,12 +20,96 @@ Since we are dealing with a huge data set we need fast inserts, fast look-ups, a
   | name  | TString    |
   | email | TString    |
   
+*** Node
+  | field   | field type |
+  |---------+------------|
+  | data    | ↑TEntry    |
+  | next    | ↑Node      |
+  
+*** List
+  | field | field type |
+  |-------+------------|
+  | head  | ↑Node      |
+  | tail  | ↑Node      |
+  
+**** Operations:
+     - init():
+       - pre:
+       - post:
+     - createNode(ll, value):
+       - pre:
+       - post:
+     - insertFirst(ll, value):
+       - pre:
+       - post:
+     - deleteFirst(ll):
+       - pre:
+       - post: 
+     - deleteElement(ll, element):
+       - pre:
+       - post:
+     - getElement(ll, email):
+       - pre:
+       - post:
+     - sort(ll):
+       - pre:
+       - post:
+     - count(ll):
+       - pre:
+       - post:
+         
+*** Hash Table
+  #+ATTR_LaTeX: :center nil
+  | field  | field type |
+  |--------+------------|
+  | keys   | ↑TList      |
+  | values | ↑TList[]    |
+**** Operations:
+     - init():
+       - pre:
+       - post:
+     - add(ht, TEntry):
+       - pre:
+       - post:
+     - get(ht, TString name):
+       - pre:
+       - post:
+       - post: removes the entry with the name equal with name
+     - remove(ht, TString name):
+       - pre: name is a TString
+       - post: removes the entry with the name equal with name
+     - count(ht):
+       - pre: 
+       - post: 
+         
+*** HashTableIterator
+  | field      | field type  |
+  |------------+-------------|
+  | ht         | ↑THashTable |
+  | currentKey | ↑Node       |
+  | current    | ↑Node       |
+  
+**** Operations:
+     - init(ith, ht):
+       - pre: ith is an iterator, ht is a Hash Table
+       - post:
+     - getCurrent(ht):
+       - pre:
+       - post:
+     - next(ht):
+       - pre:
+       - post:
+       - post: 
+     - valid(ht):
+       - pre:
+       - post:
+  
 *** Repository
   #+ATTR_LaTeX: :center nil
-  | field    | field type    |
-  |----------+---------------|
-  | ht       | ↑[THashTable] |
-  | relation | ↑Relation     |
+  | field    | field type  |
+  |----------+-------------|
+  | ht       | ↑THashTable |
+  | relation | ↑Relation   |
 **** Operations:
      - init(ht, relation):
        - pre: relation is a relation
@@ -54,54 +138,3 @@ Since we are dealing with a huge data set we need fast inserts, fast look-ups, a
      - void reset():
        - pre: 
        - post: clears the entire hash table
-*** Hash Table
-  #+ATTR_LaTeX: :center nil
-  | field | field type |
-  |-------+------------|
-  | keys  | [TInt]     |
-  |       |            |
-**** Operations:
-     - init():
-       - pre:
-       - post:
-     - void insert(TEntry):
-       - pre:
-       - post:
-     - TEntry retrive(TString name):
-       - pre:
-       - post:
-       - post: removes the entry with the name equal with name
-     - void remove(TString name):
-       - pre: name is a TString
-       - post: removes the entry with the name equal with name
-     - clear:
-       - pre:
-       - post: clears the hash table
-     - isEmpty():
-       - pre:
-       - post: returns true if hash table if empty false otherwise
-     - bool isFull():
-       - pre:
-       - post: returns true if hash table if full false otherwise
-         
-*** HashTableIterator
-  | field       | field type |
-  |-------------+------------|
-  | ht          | HashTable  |
-  | currentPos  | Integer    |
-  | currentNone | ↑Node      |
-  
-**** Operations:
-     - init(ith, ht):
-       - pre: ith is an iterator, ht is a Hash Table
-       - post:
-     - Node getCurrent(TEntry entry):
-       - pre:
-       - post:
-     - Node next():
-       - pre:
-       - post:
-       - post: 
-     - bool valid():
-       - pre:
-       - post:
