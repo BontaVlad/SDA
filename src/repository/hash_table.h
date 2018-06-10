@@ -11,7 +11,6 @@ class HashTable
 private:
   List *keys;
   List* values[M];
-  int *next;
 public:
   HashTable();
   // ~HashTable();
@@ -22,49 +21,16 @@ public:
   int count();
 };
 
-// class HashTableIterator
-// {
-//   friend class HashTableIterator;
-// public:
-//   HashTable* ht;
-//   int current;
-//   Node* currentNode;
-//   HashTableIterator(HashTable* ht)
-//   {
-//     this->ht = ht;
-//     currentNode = NULL;
-//     current = 0;
-//   }
+class HashTableIterator
+{
+  friend class HashTable;
+public:
+  HashTableIterator(HashTable* ht);
+  HashTable* ht;
+  Node* currentKey;
+  Node* current;
+  Node* next();
+  bool valid();
+  Node* getCurrent();
 
-//   bool valid()
-//   {
-//     return this->current <= M;
-//   }
-
-//   Entry* next()
-//   {
-//     if (!valid()) {return NULL;}
-//     if (currentNode == NULL) {
-//       cout << "node is null" << endl;
-//       while(ht->keys[this->current] == "")
-//         {
-//           cout << current << endl;
-//           this->current++;
-//         }
-//       currentNode = ht->values[this->current]->head;
-//     }
-//     else if (currentNode->next == NULL){
-//       cout << "node->next is null" << endl;
-//       while(ht->keys[this->current] == "")
-//         {
-//           this->current++;
-//         }
-//       currentNode = ht->values[this->current]->head;
-//     }
-//     else {
-//       cout << "node->next is not null" << endl;
-//       currentNode = currentNode->next;
-//     }
-//     return currentNode->data;
-//   }
-// };
+};

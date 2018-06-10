@@ -48,11 +48,61 @@ void HashTable::remove(string key) {
 
 int HashTable::count() {
   int num = 0;
-  Node* curr;
+  Node *curr;
   int index;
-  for(curr = keys->head; curr != NULL; curr = curr->next) {
+  for (curr = keys->head; curr != NULL; curr = curr->next) {
     index = this->hash(curr->data->email);
     num = num + this->values[index]->count();
   }
   return num;
+}
+
+HashTableIterator::HashTableIterator(HashTable *ht) {
+  this->ht = ht;
+  currentKey = ht->keys->head;
+  current = NULL;
+}
+
+bool HashTableIterator::valid() {
+  if (this->currentKey == NULL) {
+    return false;
+  }
+  if (this->current == NULL) {
+    return false;
+  }
+  if (this->currentKey->next == NULL) {
+    return false;
+  }
+  if (this->current == NULL) {
+    return false;
+  }
+  return true;
+}
+
+Node* HashTableIterator::next() {
+  if (this->currentKey == NULL) {
+    if (this->ht->keys->head == NULL) {
+      return NULL;
+    }
+    this->currentKey = ht->keys->head;
+    auto index = this->ht->hash(currentKey->data->email);
+    this->current = this->ht->values[index]->head;
+    return this->current;
+  }
+  if (this->current->next == NULL) {
+    if (this->currentKey->next != NULL) {
+      this->currentKey = this->currentKey->next;
+      auto index = this->ht->hash(currentKey->data->email);
+      this->current = this->ht->values[index]->head;
+    } else {
+      return NULL;
+    }
+  } else {
+    this->current = this->current->next;
+  }
+  return this->current;
+}
+
+Node *HashTableIterator::getCurrent() {
+  return this->current;
 }

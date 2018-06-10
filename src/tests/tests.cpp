@@ -1,6 +1,6 @@
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
 #include "catch.hpp"
-// #include "../repository/hash_table.h"
+#include <iostream>
 #include "../repository/list.h"
 #include "../repository/entry.h"
 #include "../repository/hash_table.h"
@@ -194,28 +194,54 @@ TEST_CASE( "HashTable", "[adding, deleting, searching, sorting]" ) {
     REQUIRE(ht->count() == 2);
   }
 
-  // SECTION("Test HT iterator") {
-  //   auto ht = new HashTable();
-  //   auto iter = new HashTableIterator(ht);
+  SECTION("Test HT iterator") {
+    auto ht = new HashTable();
+    HashTableIterator* iter = new HashTableIterator(ht);
+    iter->next();
+    REQUIRE(iter->valid() == false);
 
-  //   auto entry_1 = new Entry(1, "Zhāng Li", "babyboy@yahoo.com");
-  //   auto entry_2 = new Entry(10, "Wang Chu", "i_hate_monday@gmail.com");
-  //   auto entry_3 = new Entry(30, "Lao Liew", "nospam@hotmail.com");
-  //   auto entry_4 = new Entry(20, "Yang Gi", "notworthy@gmail.com");
-  //   auto entry_5 = new Entry(10, "Wu Tang", "serious_sam@gmail.com");
-  //   auto entry_6 = new Entry(999, "Mu Lan", "disney@disney.com");
-  //   auto entry_7 = new Entry(12345, "Zhou Ma", "kill_bill@movie.com");
+    auto entry_1 = new Entry(1, "Zhāng Li", "babyboy@yahoo.com");
+    auto entry_2 = new Entry(10, "Wang Chu", "i_hate_monday@gmail.com");
+    auto entry_3 = new Entry(30, "Lao Liew", "nospam@hotmail.com");
 
-  //   ht->add(entry_1->email, entry_1);
-  //   ht->add(entry_2->email, entry_2);
-  //   ht->add(entry_3->email, entry_3);
-  //   ht->add(entry_4->email, entry_4);
-  //   ht->add(entry_5->email, entry_4);
-  //   ht->add(entry_6->email, entry_4);
-  //   ht->add(entry_7->email, entry_4);
+    ht->add(entry_1);
+    ht->add(entry_2);
+    ht->add(entry_3);
 
-  //   while(iter->next() != NULL) {
-  //     cout << iter->currentNode->data->email << endl;
-  //   }
-  // }
+    iter->next();
+    REQUIRE(iter->valid() == true);
+    iter->next();
+    REQUIRE(iter->valid() == true);
+    iter->next();
+    REQUIRE(iter->valid() == false);
+  }
+
+  SECTION("Test HT iterator") {
+    auto ht = new HashTable();
+    HashTableIterator* iter = new HashTableIterator(ht);
+    iter->next();
+    REQUIRE(iter->valid() == false);
+
+    auto entry_1 = new Entry(1, "Zhāng Li", "babyboy@yahoo.com");
+    auto entry_2 = new Entry(10, "Wang Chu", "i_hate_monday@gmail.com");
+    auto entry_3 = new Entry(30, "Lao Liew", "nospam@hotmail.com");
+    auto entry_4 = new Entry(20, "Yang Gi", "notworthy@gmail.com");
+
+    ht->add(entry_4);
+    ht->add(entry_1);
+    ht->add(entry_2);
+    ht->add(entry_3);
+
+    iter->next();
+    REQUIRE(iter->valid() == true);
+    REQUIRE(iter->getCurrent()->data->email == "nospam@hotmail.com");
+
+    iter->next();
+    REQUIRE(iter->valid() == true);
+    REQUIRE(iter->getCurrent()->data->email == "i_hate_monday@gmail.com");
+
+    iter->next();
+    REQUIRE(iter->valid() == true);
+    REQUIRE(iter->getCurrent()->data->email == "babyboy@yahoo.com");
+  }
 }
